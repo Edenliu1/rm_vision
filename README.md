@@ -4,6 +4,34 @@
 
 <img src="docs/rm_vision.svg" alt="rm_vision" width="200" height="200">
 
+
+
+## Camera Setup
+
+1. list the USB port, ensuring the camera is connected to USB bus port 3.0. (lsusb)
+2. update the list of available software packages and upgrade them (sudo apt update && sudo apt upgrade)
+3. More packages such as cmake to install (sudo apt install git cmake build-essential pkg-config)
+4. Install dependencies for RealSense camera hardware communication, GUI, and graphic rendering(sudo apt install libusb-1.0-0-dev libgtk-3-dev libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev)
+5. Clone most recent realsense library and locate to that folder: (git clone https://github.com/IntelRealSense/librealsense.git
+cd librealsense)
+6. Create a build directory and configure it makelist file so it can be compiled in local system (
+mkdir build && cd build
+cmake ../ -DBUILD_EXAMPLES=true
+)
+7. compile and install(
+make -j$(nproc)
+sudo make install
+)
+8. test GUI(
+realsense-viewer
+)
+9. Integrate with CV package.
+
+
+
+
+
+
 ## Overview
 
 rm_vision 项目旨在为 RoboMaster 队伍提供一个规范、易用、鲁棒、高性能的视觉框架方案，为 RM 开源生态的建设添砖加瓦
