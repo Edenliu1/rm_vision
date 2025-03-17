@@ -84,8 +84,28 @@ Now you can get parameters.
 
 ## Run realsense camera in docker/dash
 
-1. ros2 launch realsense2_camera rs_launch.py
-2. 
+1. Run realsense camera in your docker_bash_1: (
+ros2 launch realsense2_camera rs_launch.py
+)
+
+You run the camera in one docker and retrieve the data in that docker but with another opened bash.
+
+## Open another bash but in the same docker
+
+1. open that docker in a new bash:(
+sudo docker start rv_devel
+sudo docker exec -it rv_devel bash
+)
+
+2. source ros2 and packages: (
+source /opt/ros/humble/setup.bash
+source /ros_ws/install/setup.bash
+)
+
+3. retrieve the output RGB, depth data from bash 1:(
+ros2 topic list
+)
+
 
 
 
