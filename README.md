@@ -28,6 +28,71 @@ realsense-viewer
 9. Integrate with CV package.
 
 
+## Set up  docker
+
+1. pull docker (
+sudo docker pull ghcr.io/fateryu/rm_vision:latest
+)
+
+docker was installed by snap. 
+So check docker status via: sudo systemctl status snap.docker.dockerd.service
+
+
+2. configure the docker(
+docker run -it --name rv_devel \
+--privileged --network host \
+-v /dev:/dev -v $HOME/.ros:/root/.ros -v ws:/ros_ws \
+ghcr.io/fateryu/rm_vision:latest \
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+)
+
+Second time accessing the docker:(
+sudo docker ps -a: list dockers
+
+!!! sudo docker start rv_devel: start docker named rv_devel
+
+!!! sudo docker exec -it rv_devel bash: open interactive shell inside the container. You can access it as it is a separate machine
+
+3. remove duplicate folder as ros_ws/rm_auto_aim and rows_ws/src/rm_auto_aim contain the same file(
+rm -rf /ros_ws/rm_auto_aim
+
+4. install missing python package(
+sudo apt-get update
+sudo apt-get install python3-ament-package
+)
+
+5. After you move back to the docker, source the ROS2 environment before building ensuring all dependencies are found:(
+source /opt/ros/humble/setup.bash
+)
+
+6. build the workspace:(
+cd /ros_ws
+colcon build --symlink-install
+)
+
+7. source ros2 and packages to current shell(docker): (
+source /opt/ros/humble/setup.bash
+source /ros_ws/install/setup.bash
+)
+
+9. run the armor_dectector package:(
+ros2 run armor_detector armor_detector_node
+)
+
+Now you can get parameters. 
+
+
+## Run realsense camera in docker/dash
+
+1. ros2 launch realsense2_camera rs_launch.py
+2. 
+
+
+
+
+
+
+
 
 
 
