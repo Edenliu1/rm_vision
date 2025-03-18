@@ -106,6 +106,17 @@ source /ros_ws/install/setup.bash
 ros2 topic list
 )
 
+4. Remap the topic camera info to armor_detector node:(
+ros2 run armor_detector armor_detector_node --ros-args -r /image_raw:=/camera/camera/color/image_raw -r /camera_info:=/camera/camera/color/camera_info
+)
+	•	Its local /image_raw topic to /camera/camera/color/image_raw
+	•	Its local /camera_info topic to /camera/camera/color/camera_info
+
+5. Verify if the detector is receiving data from camera topic:(
+ros2 topic echo /detector/armors
+)
+
+
 
 
 
